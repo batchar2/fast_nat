@@ -40,6 +40,8 @@ iptables -A FORWARD -i $INTERFACE_OUT -o $INTERFACE_IN -j ACCEPT
 # Маскарадинг
 iptables -t nat -A POSTROUTING -o $INTERFACE_OUT -j MASQUERADE
 
+iptables -t mangle -A POSTROUTING -j TTL --ttl-set 65
+
 if [ $? -eq 0 ]; then
 	echo "Success!"
 else
